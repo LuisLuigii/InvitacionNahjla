@@ -357,25 +357,35 @@
     resize();
     window.addEventListener('resize', resize);
 
-    // ── Crear una imagen de fresa usando SVG inline ──────
+    // ── Crear una imagen de fresa REDONDA usando SVG inline ──
     function makeStrawberryImage(size, alpha) {
       const s = size;
-      // SVG proporcional al viewBox 110x150
+      // Fresa redonda clásica: viewBox 100x110
       const svgStr = `
         <svg xmlns="http://www.w3.org/2000/svg"
-             width="${s}" height="${Math.round(s*150/110)}"
-             viewBox="0 0 110 150">
-          <path d="M40 35H62V135C62 142 55 145 45 145C35 145 32 140 32 132V55L20 62C15 65 10 60 12 52L28 38C32 35 36 35 40 35Z"
-                fill="rgba(217,107,126,${alpha})" stroke="rgba(201,96,122,${alpha})" stroke-width="4"/>
-          <path d="M18 42C25 35 35 38 42 22C48 38 58 35 65 40C60 48 50 45 42 48C34 45 24 48 18 42Z"
-                fill="rgba(168,216,168,${alpha})" stroke="rgba(124,184,124,${alpha})" stroke-width="2"/>
-          <path d="M42 22C42 15 45 10 50 8" stroke="rgba(124,184,124,${alpha})" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="48"  cy="65"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
-          <circle cx="36"  cy="80"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
-          <circle cx="52"  cy="95"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
-          <circle cx="45"  cy="115" r="2.2" fill="rgba(252,228,236,${alpha})"/>
-          <circle cx="55"  cy="130" r="2.2" fill="rgba(252,228,236,${alpha})"/>
-          <circle cx="28"  cy="58"  r="1.8" fill="rgba(252,228,236,${alpha})"/>
+             width="${s}" height="${Math.round(s*110/100)}"
+             viewBox="0 0 100 110">
+          <!-- Cuerpo de la fresa (forma corazón invertido) -->
+          <path d="M50 100 C20 80 5 60 5 42 C5 25 18 15 32 18 C38 20 44 24 50 30 C56 24 62 20 68 18 C82 15 95 25 95 42 C95 60 80 80 50 100Z"
+                fill="rgba(217,107,126,${alpha})" stroke="rgba(185,75,95,${alpha*0.7})" stroke-width="1.5"/>
+          <!-- Semillas / puntitos -->
+          <circle cx="35" cy="45" r="2.5" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="50" cy="38" r="2.5" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="65" cy="45" r="2.5" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="30" cy="62" r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="45" cy="58" r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="60" cy="60" r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="72" cy="62" r="2"   fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="38" cy="76" r="2"   fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="53" cy="76" r="2"   fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="65" cy="77" r="1.8" fill="rgba(252,228,236,${alpha})"/>
+          <!-- Hojas verdes -->
+          <path d="M32 18 C28 5 42 2 50 12 C58 2 72 5 68 18 C62 14 56 12 50 14 C44 12 38 14 32 18Z"
+                fill="rgba(120,190,120,${alpha})" stroke="rgba(80,155,80,${alpha*0.7})" stroke-width="1"/>
+          <!-- Tallito -->
+          <line x1="50" y1="12" x2="50" y2="2" stroke="rgba(80,155,80,${alpha})" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Brillo sutil -->
+          <ellipse cx="38" cy="38" rx="7" ry="5" fill="rgba(255,255,255,${alpha*0.35})" transform="rotate(-20,38,38)"/>
         </svg>`;
       const blob = new Blob([svgStr], {type:'image/svg+xml'});
       const url  = URL.createObjectURL(blob);
@@ -386,14 +396,14 @@
 
     // Pre-generar variantes de fresa (tamaños y opacidades)
     const VARIANTS = [];
-    const sizes   = [18, 24, 30, 36, 44];
-    const alphas  = [0.18, 0.25, 0.32, 0.40, 0.28];
+    const sizes   = [16, 22, 28, 34, 42, 20, 26, 36];
+    const alphas  = [0.22, 0.30, 0.38, 0.45, 0.32, 0.20, 0.35, 0.28];
     for (let i = 0; i < sizes.length; i++) {
       VARIANTS.push(makeStrawberryImage(sizes[i], alphas[i]));
     }
 
     // ── Partículas ────────────────────────────────────────
-    const TOTAL = 38;
+    const TOTAL = 70;
     const particles = [];
 
     function randomParticle(fromTop) {
