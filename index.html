@@ -10,7 +10,7 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --romantic-bg:      #fdf8f5;
+      --romantic-bg:      #fdf3f6;
       --romantic-text:    #3d3431;
       --romantic-primary: #d96b7e;
       --romantic-soft:    #f9eae7;
@@ -18,22 +18,35 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: #1a1a1a;
+      /* Fondo rosa suave tipo macarón */
+      background: linear-gradient(135deg, #f7c5d0 0%, #f9a8bc 40%, #f4b8c8 70%, #fbd0dc 100%);
       display: flex;
       justify-content: center;
       align-items: flex-start;
       min-height: 100vh;
       padding: 40px 20px;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* ── TARJETA ── */
+    /* ── CANVAS DE FRESAS CAYENDO ── */
+    #strawberry-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── TARJETA (sobre el canvas) ── */
     .invitation-card {
       max-width: 430px;
       width: 100%;
       border-radius: 24px;
       padding: 36px 30px 40px;
-      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+      box-shadow: 0 30px 70px rgba(180,60,90,0.22), 0 8px 24px rgba(0,0,0,0.08);
       position: relative;
+      z-index: 1;
       overflow: hidden;
       background-color: var(--romantic-bg);
       color: var(--romantic-text);
@@ -110,9 +123,9 @@
     }
     .strawberry-1 {
       filter: drop-shadow(0 4px 8px rgba(217,107,126,0.25));
-      animation: float 3.5s ease-in-out infinite;
+      animation: floatup 3.5s ease-in-out infinite;
     }
-    @keyframes float {
+    @keyframes floatup {
       0%,100% { transform: translateY(0)   scale(1);    }
       50%      { transform: translateY(-6px) scale(1.03); }
     }
@@ -241,38 +254,36 @@
   </style>
 </head>
 <body>
+
+  <!-- Canvas para fresas cayendo -->
+  <canvas id="strawberry-canvas"></canvas>
+
   <div class="invitation-card">
     <div class="inner-frame">
 
-      <!-- ══ MOÑO (recoloreado en tonos románticos) ══ -->
+      <!-- ══ MOÑO ══ -->
       <div class="bow-wrapper">
         <svg width="148" height="84" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- Lazo izquierdo -->
-          <path d="M75 45C30 10 10 30 15 55C20 75 55 65 75 45Z"
-                fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
+          <path d="M75 45C30 10 10 30 15 55C20 75 55 65 75 45Z" fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
           <circle cx="35" cy="45" r="2.5" fill="#fff" opacity="0.65"/>
           <circle cx="55" cy="55" r="2.5" fill="#fff" opacity="0.65"/>
-          <!-- Lazo derecho -->
-          <path d="M85 45C130 10 150 30 145 55C140 75 105 65 85 45Z"
-                fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
+          <path d="M85 45C130 10 150 30 145 55C140 75 105 65 85 45Z" fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
           <circle cx="125" cy="45" r="2.5" fill="#fff" opacity="0.65"/>
           <circle cx="105" cy="55" r="2.5" fill="#fff" opacity="0.65"/>
-          <!-- Cintas colgantes -->
           <path d="M70 50C60 70 45 85 40 85" stroke="#c9607a" stroke-width="2.5" stroke-linecap="round"/>
           <path d="M90 50C100 70 115 85 120 85" stroke="#c9607a" stroke-width="2.5" stroke-linecap="round"/>
-          <!-- Nudo central (pequeña fresa delicada) -->
           <circle cx="80" cy="45" r="13" fill="#d96b7e" stroke="#c9607a" stroke-width="1.8"/>
           <path d="M73 38C76 34 84 34 87 38C84 39 76 39 73 38Z" fill="#a8d8a8"/>
-          <circle cx="76" cy="44" r="1"   fill="#fff" opacity="0.8"/>
-          <circle cx="84" cy="44" r="1"   fill="#fff" opacity="0.8"/>
-          <circle cx="80" cy="50" r="1"   fill="#fff" opacity="0.8"/>
+          <circle cx="76" cy="44" r="1" fill="#fff" opacity="0.8"/>
+          <circle cx="84" cy="44" r="1" fill="#fff" opacity="0.8"/>
+          <circle cx="80" cy="50" r="1" fill="#fff" opacity="0.8"/>
         </svg>
       </div>
 
       <p class="guest-text">Nuestra dulce niña</p>
       <h1 class="name-calligraphy">Najhla</h1>
 
-      <!-- ══ NÚMERO 1 FRESA (tamaño reducido, tono romántico) ══ -->
+      <!-- ══ NÚMERO 1 FRESA ══ -->
       <div class="strawberry-row">
         <div class="strawberry-line"></div>
         <div class="strawberry-1">
@@ -329,5 +340,130 @@
 
     </div>
   </div>
+
+  <script>
+    // ═══════════════════════════════════════════════════════
+    //  FRESAS CAYENDO  –  dibujadas con Canvas 2D
+    //  Cada fresa es un mini SVG path convertido en imagen
+    // ═══════════════════════════════════════════════════════
+    const canvas = document.getElementById('strawberry-canvas');
+    const ctx    = canvas.getContext('2d');
+
+    // Ajustar canvas al tamaño de ventana
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Crear una imagen de fresa usando SVG inline ──────
+    function makeStrawberryImage(size, alpha) {
+      const s = size;
+      // SVG proporcional al viewBox 110x150
+      const svgStr = `
+        <svg xmlns="http://www.w3.org/2000/svg"
+             width="${s}" height="${Math.round(s*150/110)}"
+             viewBox="0 0 110 150">
+          <path d="M40 35H62V135C62 142 55 145 45 145C35 145 32 140 32 132V55L20 62C15 65 10 60 12 52L28 38C32 35 36 35 40 35Z"
+                fill="rgba(217,107,126,${alpha})" stroke="rgba(201,96,122,${alpha})" stroke-width="4"/>
+          <path d="M18 42C25 35 35 38 42 22C48 38 58 35 65 40C60 48 50 45 42 48C34 45 24 48 18 42Z"
+                fill="rgba(168,216,168,${alpha})" stroke="rgba(124,184,124,${alpha})" stroke-width="2"/>
+          <path d="M42 22C42 15 45 10 50 8" stroke="rgba(124,184,124,${alpha})" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="48"  cy="65"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="36"  cy="80"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="52"  cy="95"  r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="45"  cy="115" r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="55"  cy="130" r="2.2" fill="rgba(252,228,236,${alpha})"/>
+          <circle cx="28"  cy="58"  r="1.8" fill="rgba(252,228,236,${alpha})"/>
+        </svg>`;
+      const blob = new Blob([svgStr], {type:'image/svg+xml'});
+      const url  = URL.createObjectURL(blob);
+      const img  = new Image();
+      img.src    = url;
+      return img;
+    }
+
+    // Pre-generar variantes de fresa (tamaños y opacidades)
+    const VARIANTS = [];
+    const sizes   = [18, 24, 30, 36, 44];
+    const alphas  = [0.18, 0.25, 0.32, 0.40, 0.28];
+    for (let i = 0; i < sizes.length; i++) {
+      VARIANTS.push(makeStrawberryImage(sizes[i], alphas[i]));
+    }
+
+    // ── Partículas ────────────────────────────────────────
+    const TOTAL = 38;
+    const particles = [];
+
+    function randomParticle(fromTop) {
+      const vi = Math.floor(Math.random() * VARIANTS.length);
+      const s  = sizes[vi];
+      return {
+        x:      Math.random() * window.innerWidth,
+        y:      fromTop ? -s * 2 - Math.random() * window.innerHeight
+                        : -s - Math.random() * window.innerHeight,
+        vy:     0.6 + Math.random() * 1.1,          // velocidad caída
+        vx:     (Math.random() - 0.5) * 0.5,        // deriva lateral leve
+        rot:    Math.random() * Math.PI * 2,
+        rotV:   (Math.random() - 0.5) * 0.018,      // rotación
+        img:    VARIANTS[vi],
+        w:      s,
+        h:      Math.round(s * 150 / 110),
+        swing:  Math.random() * Math.PI * 2,         // fase del balanceo
+        swingS: 0.008 + Math.random() * 0.012,       // velocidad balanceo
+        swingA: 0.4 + Math.random() * 0.9,           // amplitud balanceo px
+      };
+    }
+
+    // Llenar pantalla desde el inicio (distribuidas en Y)
+    for (let i = 0; i < TOTAL; i++) {
+      const p = randomParticle(false);
+      p.y = -p.h + Math.random() * (window.innerHeight + p.h); // distribuir
+      particles.push(p);
+    }
+
+    // ── Loop de animación ────────────────────────────────
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(p => {
+        p.y     += p.vy;
+        p.swing += p.swingS;
+        p.x     += p.vx + Math.sin(p.swing) * p.swingA;
+        p.rot   += p.rotV;
+
+        // Rebotar lateralmente
+        if (p.x > canvas.width  + p.w) p.x = -p.w;
+        if (p.x < -p.w * 2)            p.x = canvas.width + p.w;
+
+        // Reiniciar al salir por abajo
+        if (p.y > canvas.height + p.h + 10) {
+          const fresh = randomParticle(true);
+          Object.assign(p, fresh);
+        }
+
+        // Dibujar con rotación
+        ctx.save();
+        ctx.translate(p.x + p.w / 2, p.y + p.h / 2);
+        ctx.rotate(p.rot);
+        if (p.img.complete) {
+          ctx.drawImage(p.img, -p.w / 2, -p.h / 2, p.w, p.h);
+        }
+        ctx.restore();
+      });
+
+      requestAnimationFrame(animate);
+    }
+
+    // Esperar a que carguen las imágenes antes de arrancar
+    let loaded = 0;
+    VARIANTS.forEach(img => {
+      img.onload = () => { loaded++; if (loaded === VARIANTS.length) animate(); };
+      // Fallback si ya cargó
+      if (img.complete) { loaded++; if (loaded === VARIANTS.length) animate(); }
+    });
+  </script>
+
 </body>
 </html>
