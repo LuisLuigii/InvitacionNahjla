@@ -1,913 +1,333 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Digital - Najhla</title>
-    <style>
-        /* Importar fuentes lúdicas y bonitas de Google Fonts */
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Pacifico&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invitación Najhla – Acuarela Romántica</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
-        :root {
-            --pink-dark: #d63356;
-            --pink-main: #ff527b;
-            --pink-light: #fff0f3;
-            --bg-gingham: #ffebf0;
-            --strawberry-red: #ff385c;
-            --leaf-green: #4caf50;
-            --text-color: #4a3b32;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+    :root {
+      --romantic-bg:      #fdf8f5;
+      --romantic-text:    #3d3431;
+      --romantic-primary: #d96b7e;
+      --romantic-soft:    #f9eae7;
+    }
 
-        body {
-            font-family: 'Fredoka', sans-serif;
-            background-color: var(--bg-gingham);
-            /* Patrón de mantel/picnic (Gingham) en CSS puro */
-            background-image: 
-                linear-gradient(90deg, rgba(255,255,255,.6) 50%, transparent 50%),
-                linear-gradient(rgba(255,255,255,.6) 50%, transparent 50%);
-            background-size: 45px 45px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            color: var(--text-color);
-        }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #1a1a1a;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
 
-        /* Contenedor estilo Scrapbook / Collage Lúdico */
-        .collage-container {
-            max-width: 440px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 30px;
-            padding: 35px 25px;
-            box-shadow: 0 20px 40px rgba(214, 51, 86, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-            border: 10px solid #ffffff;
-            outline: 3px dashed var(--pink-main);
-            outline-offset: -8px;
-        }
+    /* ── TARJETA ── */
+    .invitation-card {
+      max-width: 430px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 36px 30px 40px;
+      box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+      position: relative;
+      overflow: hidden;
+      background-color: var(--romantic-bg);
+      color: var(--romantic-text);
+      text-align: center;
+      background-image:
+        radial-gradient(circle at 10% 10%,  rgba(255,182,193,0.28) 0%, transparent 50%),
+        radial-gradient(circle at 90% 80%,  rgba(253,220,220,0.30) 0%, transparent 60%),
+        radial-gradient(circle at 50% 40%,  rgba(255,240,243,0.50) 0%, transparent 70%);
+    }
 
-        /* Moño decorativo superior en SVG */
-        .top-bow {
-            text-align: center;
-            margin-top: -10px;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1));
-            animation: sway 4s ease-in-out infinite alternate;
-        }
+    /* flores de esquina */
+    .invitation-card::before {
+      content: '✿';
+      position: absolute; top: 15px; left: 20px;
+      font-size: 1.8rem; color: rgba(217,107,126,0.22);
+    }
+    .invitation-card::after {
+      content: '✿';
+      position: absolute; bottom: 15px; right: 20px;
+      font-size: 1.8rem; color: rgba(217,107,126,0.22);
+    }
 
-        @keyframes sway {
-            0% { transform: rotate(-2deg); }
-            100% { transform: rotate(2deg); }
-        }
+    /* marco interior sutil */
+    .inner-frame {
+      border: 1px solid rgba(217,107,126,0.14);
+      border-radius: 16px;
+      padding: 28px 18px;
+    }
 
-        /* Título Principal estilo 3D Recortado */
-        .title-najhla {
-            font-size: 3.8rem;
-            font-weight: 700;
-            color: var(--pink-main);
-            text-align: center;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            text-shadow: 3px 3px 0px #ffccd5, 5px 5px 0px rgba(0,0,0,0.04);
-            transform: rotate(-1deg);
-        }
+    /* ── MOÑO ── */
+    .bow-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 3px 8px rgba(217,107,126,0.22));
+      animation: sway 5s ease-in-out infinite alternate;
+    }
+    @keyframes sway {
+      0%   { transform: rotate(-1.5deg); }
+      100% { transform: rotate( 1.5deg); }
+    }
 
-        /* Fresa con forma de Número 1 animada */
-        .strawberry-number {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-            filter: drop-shadow(0 8px 10px rgba(255, 56, 92, 0.2));
-            animation: float 3s ease-in-out infinite;
-        }
+    /* ── NOMBRE ── */
+    .guest-text {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #9c847d;
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-8px) scale(1.02); }
-        }
+    .name-calligraphy {
+      font-family: 'Pinyon Script', cursive;
+      font-size: 5.2rem;
+      color: var(--romantic-primary);
+      line-height: 0.85;
+      margin-bottom: 18px;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+    }
 
-        /* Texto de introducción estilo papel recortado */
-        .intro-tag {
-            background: var(--pink-light);
-            border: 2px dashed #ffccd5;
-            padding: 15px;
-            border-radius: 16px;
-            text-align: center;
-            font-size: 1.15rem;
-            font-weight: 600;
-            line-height: 1.4;
-            margin: 20px 0;
-            box-shadow: 2px 5px 10px rgba(0,0,0,0.02);
-            transform: rotate(1deg);
-            position: relative;
-        }
+    /* ── NÚMERO 1 FRESA ── */
+    .strawberry-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 0 20px;
+    }
+    .strawberry-line {
+      height: 1px;
+      width: 55px;
+      background: linear-gradient(to right, transparent, rgba(217,107,126,0.35), transparent);
+    }
+    .strawberry-1 {
+      filter: drop-shadow(0 4px 8px rgba(217,107,126,0.25));
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0)   scale(1);    }
+      50%      { transform: translateY(-6px) scale(1.03); }
+    }
 
-        /* Efecto de cinta adhesiva (Washi Tape) */
-        .washi-tape-top {
-            position: absolute;
-            top: -12px;
-            left: 35%;
-            width: 120px;
-            height: 24px;
-            background: rgba(255, 255, 255, 0.7);
-            border-left: 3px dotted var(--pink-main);
-            border-right: 3px dotted var(--pink-main);
-            transform: rotate(-2deg);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-        }
+    /* ── BADGE ── */
+    .celebration-badge {
+      display: inline-block;
+      background: rgba(217,107,126,0.08);
+      border: 1px solid rgba(217,107,126,0.2);
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--romantic-primary);
+      margin-bottom: 22px;
+      font-weight: 600;
+    }
 
-        /* Banner de Fecha estilo cinta washi grande */
-        .date-banner {
-            background: var(--pink-dark);
-            color: #ffffff;
-            text-align: center;
-            padding: 12px 20px;
-            font-size: 2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            margin: 25px -35px;
-            transform: rotate(-2deg);
-            box-shadow: 0 5px 15px rgba(214, 51, 86, 0.3);
-            clip-path: polygon(4% 0%, 96% 0%, 100% 50%, 96% 100%, 4% 100%, 0% 50%);
-        }
+    /* ── MENSAJE ── */
+    .message-body {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      line-height: 1.78;
+      color: #5a4f4c;
+      margin-bottom: 28px;
+    }
 
-        /* Bloques de detalles (Misa y Fiesta) */
-        .details-section {
-            margin-top: 25px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+    /* ── FECHA ── */
+    .romantic-date-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      margin: 0 0 28px;
+    }
+    .date-side {
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #9c847d;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      padding: 5px 0;
+      width: 72px;
+    }
+    .date-center {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 400;
+      line-height: 1;
+      color: var(--romantic-primary);
+    }
 
-        .detail-item {
-            background: #ffffff;
-            border: 2px solid #fff0f3;
-            border-radius: 20px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-            position: relative;
-        }
+    /* ── DETALLES ── */
+    .romantic-details-list { text-align: center; margin-bottom: 4px; }
+    .romantic-item {
+      margin-bottom: 18px;
+      position: relative;
+      padding-bottom: 8px;
+    }
+    .romantic-item:not(:last-child)::after {
+      content: '·';
+      position: absolute; bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      color: rgba(0,0,0,0.15);
+      font-size: 1.2rem;
+    }
+    .romantic-item h5 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #9c847d;
+      margin-bottom: 3px;
+    }
+    .romantic-item p {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--romantic-text);
+      font-weight: 600;
+    }
 
-        .detail-item::before {
-            content: '';
-            position: absolute;
-            top: -6px;
-            left: 20px;
-            width: 50px;
-            height: 14px;
-            background: rgba(255, 182, 193, 0.4);
-            transform: rotate(-5deg);
-        }
-
-        .detail-item:nth-child(even) {
-            transform: rotate(1deg);
-        }
-        .detail-item:nth-child(odd) {
-            transform: rotate(-1deg);
-        }
-
-        .icon-box {
-            width: 55px;
-            height: 55px;
-            background: var(--pink-light);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-shrink: 0;
-        }
-
-        .info-content h3 {
-            color: var(--pink-dark);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 2px;
-            text-transform: uppercase;
-        }
-
-        .info-content p {
-            font-size: 1.15rem;
-            color: #665a52;
-            font-weight: 600;
-        }
-
-        /* Botones Interactivos para la Web */
-        .web-actions {
-            margin-top: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-            background: var(--pink-main);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 15px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            box-shadow: 0 6px 15px rgba(255, 82, 123, 0.3);
-            transition: all 0.2s ease;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: var(--pink-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(214, 51, 86, 0.4);
-        }
-
-        .btn-secondary {
-            background: #ffffff;
-            color: var(--pink-dark);
-            border: 2px solid var(--pink-main);
-            box-shadow: none;
-        }
-
-        .btn-secondary:hover {
-            background: var(--pink-light);
-            transform: translateY(-2px);
-        }
-
-        /* Decoración inferior de Fresas/Cerezas en SVG */
-        .bottom-decoration {
-            text-align: center;
-            margin-top: 25px;
-            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.08));
-        }
-    </style>
+    /* ── BOTONES ── */
+    .actions-area {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+    }
+    .web-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 24px;
+      font-size: 0.79rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-decoration: none;
+      border-radius: 50px;
+      transition: all 0.3s cubic-bezier(0.165,0.84,0.44,1);
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-primary {
+      background: var(--romantic-primary);
+      color: #fff;
+      box-shadow: 0 8px 20px rgba(217,107,126,0.28);
+      border: none;
+    }
+    .btn-primary:hover {
+      background: #c55669;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(217,107,126,0.4);
+    }
+    .btn-secondary {
+      background: #fff;
+      color: var(--romantic-primary);
+      border: 1px solid rgba(217,107,126,0.25);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }
+    .btn-secondary:hover {
+      background: var(--romantic-soft);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
+  <div class="invitation-card">
+    <div class="inner-frame">
 
-    <div class="collage-container">
-        
-        <div class="top-bow">
-            <svg width="160" height="90" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M75 45C30 10 10 30 15 55C20 75 55 65 75 45Z" fill="#ff7597" stroke="#d63356" stroke-width="3"/>
-                <circle cx="35" cy="45" r="3" fill="#ffffff" opacity="0.7"/>
-                <circle cx="55" cy="55" r="3" fill="#ffffff" opacity="0.7"/>
-                <path d="M85 45C130 10 150 30 145 55C140 75 105 65 85 45Z" fill="#ff7597" stroke="#d63356" stroke-width="3"/>
-                <circle cx="125" cy="45" r="3" fill="#ffffff" opacity="0.7"/>
-                <circle cx="105" cy="55" r="3" fill="#ffffff" opacity="0.7"/>
-                <path d="M70 50C60 70 45 85 40 85" stroke="#d63356" stroke-width="3" stroke-linecap="round"/>
-                <path d="M90 50C100 70 115 85 120 85" stroke="#d63356" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="80" cy="45" r="14" fill="#ff385c" stroke="#d63356" stroke-width="2"/>
-                <path d="M72 37C75 33 85 33 88 37C85 38 75 38 72 37Z" fill="#4caf50"/>
-                <circle cx="76" cy="44" r="1" fill="#ffffff"/>
-                <circle cx="84" cy="44" r="1" fill="#ffffff"/>
-                <circle cx="80" cy="50" r="1" fill="#ffffff"/>
-            </svg>
+      <!-- ══ MOÑO (recoloreado en tonos románticos) ══ -->
+      <div class="bow-wrapper">
+        <svg width="148" height="84" viewBox="0 0 160 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Lazo izquierdo -->
+          <path d="M75 45C30 10 10 30 15 55C20 75 55 65 75 45Z"
+                fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
+          <circle cx="35" cy="45" r="2.5" fill="#fff" opacity="0.65"/>
+          <circle cx="55" cy="55" r="2.5" fill="#fff" opacity="0.65"/>
+          <!-- Lazo derecho -->
+          <path d="M85 45C130 10 150 30 145 55C140 75 105 65 85 45Z"
+                fill="#f2a0b5" stroke="#c9607a" stroke-width="2.5"/>
+          <circle cx="125" cy="45" r="2.5" fill="#fff" opacity="0.65"/>
+          <circle cx="105" cy="55" r="2.5" fill="#fff" opacity="0.65"/>
+          <!-- Cintas colgantes -->
+          <path d="M70 50C60 70 45 85 40 85" stroke="#c9607a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M90 50C100 70 115 85 120 85" stroke="#c9607a" stroke-width="2.5" stroke-linecap="round"/>
+          <!-- Nudo central (pequeña fresa delicada) -->
+          <circle cx="80" cy="45" r="13" fill="#d96b7e" stroke="#c9607a" stroke-width="1.8"/>
+          <path d="M73 38C76 34 84 34 87 38C84 39 76 39 73 38Z" fill="#a8d8a8"/>
+          <circle cx="76" cy="44" r="1"   fill="#fff" opacity="0.8"/>
+          <circle cx="84" cy="44" r="1"   fill="#fff" opacity="0.8"/>
+          <circle cx="80" cy="50" r="1"   fill="#fff" opacity="0.8"/>
+        </svg>
+      </div>
+
+      <p class="guest-text">Nuestra dulce niña</p>
+      <h1 class="name-calligraphy">Najhla</h1>
+
+      <!-- ══ NÚMERO 1 FRESA (tamaño reducido, tono romántico) ══ -->
+      <div class="strawberry-row">
+        <div class="strawberry-line"></div>
+        <div class="strawberry-1">
+          <svg width="50" height="70" viewBox="0 0 110 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 35H62V135C62 142 55 145 45 145C35 145 32 140 32 132V55L20 62C15 65 10 60 12 52L28 38C32 35 36 35 40 35Z"
+                  fill="#d96b7e" stroke="#c9607a" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M18 42C25 35 35 38 42 22C48 38 58 35 65 40C60 48 50 45 42 48C34 45 24 48 18 42Z"
+                  fill="#a8d8a8" stroke="#7cb87c" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M42 22C42 15 45 10 50 8" stroke="#7cb87c" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="48"  cy="65"  r="2.2" fill="#fce4ec" opacity="0.9"/>
+            <circle cx="36"  cy="80"  r="2.2" fill="#fce4ec" opacity="0.9"/>
+            <circle cx="52"  cy="95"  r="2.2" fill="#fce4ec" opacity="0.9"/>
+            <circle cx="45"  cy="115" r="2.2" fill="#fce4ec" opacity="0.9"/>
+            <circle cx="55"  cy="130" r="2.2" fill="#fce4ec" opacity="0.9"/>
+            <circle cx="28"  cy="58"  r="1.8" fill="#fce4ec" opacity="0.9"/>
+          </svg>
         </div>
+        <div class="strawberry-line"></div>
+      </div>
 
-        <h1 class="title-najhla">Najhla</h1>
+      <div class="celebration-badge">Primer añito &amp; Bautizo</div>
 
-        <div class="strawberry-number">
-            <svg width="110" height="150" viewBox="0 0 110 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M40 35H62V135C62 142 55 145 45 145C35 145 32 140 32 132V55L20 62C15 65 10 60 12 52L28 38C32 35 36 35 40 35Z" fill="#ff385c" stroke="#d63356" stroke-width="4" stroke-linejoin="round"/>
-                <path d="M18 42C25 35 35 38 42 22C48 38 58 35 65 40C60 48 50 45 42 48C34 45 24 48 18 42Z" fill="#4caf50" stroke="#2e7d32" stroke-width="2" stroke-linejoin="round"/>
-                <path d="M42 22C42 15 45 10 50 8" stroke="#2e7d32" stroke-width="3" stroke-linecap="round"/>
-                <circle cx="48" cy="65" r="2.5" fill="#fff7d6"/>
-                <circle cx="36" cy="80" r="2.5" fill="#fff7d6"/>
-                <circle cx="52" cy="95" r="2.5" fill="#fff7d6"/>
-                <circle cx="45" cy="115" r="2.5" fill="#fff7d6"/>
-                <circle cx="55" cy="130" r="2.5" fill="#fff7d6"/>
-                <circle cx="28" cy="58" r="2" fill="#fff7d6"/>
-            </svg>
+      <p class="message-body">
+        Hay momentos en la vida que son irrepetibles,<br>
+        pero compartirlos con las personas<br>
+        que más queremos los hace inolvidables.
+      </p>
+
+      <div class="romantic-date-display">
+        <div class="date-side">Julio</div>
+        <div class="date-center">04</div>
+        <div class="date-side">Sábado</div>
+      </div>
+
+      <div class="romantic-details-list">
+        <div class="romantic-item">
+          <h5>Ceremonia Religiosa</h5>
+          <p>1:00 pm</p>
         </div>
-
-        <div class="intro-tag">
-            <div class="washi-tape-top"></div>
-            Te invitamos a festejar el primer año y bautizo
+        <div class="romantic-item">
+          <h5>Celebración en Salón</h5>
+          <p>3:00 pm</p>
         </div>
+      </div>
 
-        <div class="date-banner">
-            4 DE JULIO
-        </div>
-
-        <div class="details-section">
-            
-            <div class="detail-item">
-                <div class="icon-box">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff527b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v6M9 5h6"/>
-                        <path d="M4 22v-9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9"/>
-                        <path d="M12 14a2 2 0 0 0-2 2v6h4v-6a2 2 0 0 0-2-2z"/>
-                        <path d="M12 11V8"/>
-                    </svg>
-                </div>
-                <div class="info-content">
-                    <h3>Misa</h3>
-                    <p>1:00 pm</p>
-                </div>
-            </div>
-
-            <div class="detail-item">
-                <div class="icon-box">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ff527b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M6 21L12 3l6 18H6z"/>
-                        <path d="M6 21c0-2 3-3 6-3s6 1 6 3"/>
-                        <circle cx="12" cy="3" r="1" fill="#ff527b"/>
-                        <path d="M9 14ss2-1 3-1 3 1 3 1"/>
-                    </svg>
-                </div>
-                <div class="info-content">
-                    <h3>Salón / Fiesta</h3>
-                    <p>3:00 pm</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="web-actions">
-            <a href="https://maps.google.com" target="_blank" class="btn">
-                📍 Ver Ubicación en Maps
-            </a>
-            <a href="https://wa.me/1234567890?text=Hola!%20Confirmo%20mi%20asistencia%20a%20la%20fiesta%20de%20Najhla" target="_blank" class="btn btn-secondary">
-                💌 Confirmar Asistencia (WhatsApp)
-            </a>
-        </div>
-
-        <div class="bottom-decoration">
-            <svg width="100" height="60" viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M35 40C35 50 25 55 18 55C10 55 5 48 5 40C5 30 18 25 22 25C25 25 35 30 35 40Z" fill="#ff385c" stroke="#d63356" stroke-width="2"/>
-                <path d="M16 26C20 22 25 25 25 25" stroke="#4caf50" stroke-width="2" stroke-linecap="round"/>
-                <path d="M65 43C65 52 75 56 82 56C90 56 95 50 95 43C95 34 82 28 78 28C75 28 65 33 65 43Z" fill="#ff385c" stroke="#d63356" stroke-width="2"/>
-                <path d="M84 29C80 24 75 27 75 27" stroke="#4caf50" stroke-width="2" stroke-linecap="round"/>
-                <path d="M22 25C30 15 50 12 50 20C50 12 70 15 78 27" stroke="#4caf50" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="50" cy="18" r="4" fill="#ffffff" stroke="#ff527b" stroke-width="2"/>
-                <circle cx="12" cy="38" r="1" fill="#fff7d6"/>
-                <circle cx="20" cy="45" r="1" fill="#fff7d6"/>
-                <circle cx="28" cy="38" r="1" fill="#fff7d6"/>
-                <circle cx="74" cy="40" r="1" fill="#fff7d6"/>
-                <circle cx="82" cy="48" r="1" fill="#fff7d6"/>
-                <circle cx="88" cy="40" r="1" fill="#fff7d6"/>
-            </svg>
-        </div>
+      <div class="actions-area">
+        <a href="https://maps.google.com" target="_blank" class="web-btn btn-primary">
+          📍 Abrir Mapa de Dirección
+        </a>
+        <a href="https://wa.me/1234567890?text=Hola!+Confirmo+mi+asistencia" target="_blank" class="web-btn btn-secondary">
+          Confirmar Presencia
+        </a>
+      </div>
 
     </div>
-
-</body>
-</html>
-
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitaciones Premium - Najhla</title>
-    <style>
-        /* Importación de fuentes premium y sofisticadas */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
-
-        :root {
-            --color-gold: #d4af37;
-            --color-gold-dark: #aa8c2c;
-            --modern-bg: #fffbfb;
-            --modern-text: #2a2a2a;
-            --modern-primary: #e05263;
-            --modern-accent: #fceade;
-            
-            --romantic-bg: #fdf8f5;
-            --romantic-text: #3d3431;
-            --romantic-primary: #d96b7e;
-            --romantic-soft: #f9eae7;
-        }
-
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        /* Selector de Temas Superior (Solo para previsualizar en la web) */
-        .theme-selector {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 8px;
-            border-radius: 40px;
-            margin-bottom: 40px;
-            display: flex;
-            gap: 10px;
-            border: 1px solid rgba(255,255,255,0.2);
-            z-index: 100;
-            position: sticky;
-            top: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .theme-btn {
-            background: transparent;
-            color: #ccc;
-            border: none;
-            padding: 12px 24px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .theme-btn.active {
-            background: #ffffff;
-            color: #1a1a1a;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.2);
-        }
-
-        /* Contenedor de la Invitación */
-        .invitation-wrapper {
-            max-width: 450px;
-            width: 100%;
-            position: relative;
-        }
-
-        .invitation-card {
-            display: none;
-            width: 100%;
-            border-radius: 24px;
-            padding: 45px 35px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-            position: relative;
-            overflow: hidden;
-            transition: opacity 0.5s ease;
-        }
-
-        .invitation-card.active {
-            display: block;
-            animation: fadeIn 0.6s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ==========================================================================
-           ESTILO 1: MODERNO ELEGANTE (Evolución de diseño 1 - Alta Costura / Minimal)
-           ========================================================================== */
-        .card-modern {
-            background-color: var(--modern-bg);
-            color: var(--modern-text);
-            border: 1px solid rgba(0,0,0,0.05);
-            text-align: center;
-        }
-
-        .card-modern .frame-box {
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            outline: 4px solid var(--modern-accent);
-            outline-offset: -12px;
-            padding: 30px 15px;
-            border-radius: 12px;
-            height: 100%;
-        }
-
-        .card-modern .tagline {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: #888;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .card-modern .main-title {
-            font-family: 'Cinzel', serif;
-            font-size: 3rem;
-            font-weight: 400;
-            color: #111;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-        }
-
-        .card-modern .subtitle-number {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.4rem;
-            color: var(--modern-primary);
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .card-modern .subtitle-number::before,
-        .card-modern .subtitle-number::after {
-            content: '';
-            width: 30px;
-            height: 1px;
-            background: #ddd;
-        }
-
-        .card-modern .details-text {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #555;
-            margin-bottom: 35px;
-            font-weight: 400;
-        }
-
-        .card-modern .date-section {
-            margin: 30px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-            padding: 15px 0;
-        }
-
-        .card-modern .date-big {
-            font-family: 'Cinzel', serif;
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #111;
-            letter-spacing: 1px;
-        }
-
-        .card-modern .grid-events {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 25px;
-            text-align: left;
-        }
-
-        .card-modern .event-box {
-            background: #fff;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #f0f0f0;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .card-modern .event-box h4 {
-            font-family: 'Cinzel', serif;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            color: var(--modern-primary);
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .card-modern .event-box p {
-            font-size: 0.9rem;
-            color: #444;
-            font-weight: 500;
-        }
-
-        /* ==========================================================================
-           ESTILO 2: ACUARELA ROMÁNTICA (Evolución de diseño 2 - Soft Floral & Wash)
-           ========================================================================== */
-        .card-romantic {
-            background-color: var(--romantic-bg);
-            color: var(--romantic-text);
-            text-align: center;
-            /* Fondo simulando manchas suaves de acuarela mediante degradados radiales */
-            background-image: 
-                radial-gradient(circle at 10% 10%, rgba(255, 182, 193, 0.25) 0%, transparent 50%),
-                radial-gradient(circle at 90% 80%, rgba(24ceade, 0.3) 0%, transparent 60%),
-                radial-gradient(circle at 50% 40%, rgba(255, 240, 243, 0.5) 0%, transparent 70%);
-        }
-
-        /* Hojas/ramas decorativas abstractas en las esquinas */
-        .card-romantic::before {
-            content: '✿';
-            position: absolute;
-            top: 15px;
-            left: 20px;
-            font-size: 1.8rem;
-            color: rgba(217, 107, 126, 0.25);
-        }
-        .card-romantic::after {
-            content: '✿';
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            font-size: 1.8rem;
-            color: rgba(217, 107, 126, 0.25);
-        }
-
-        .card-romantic .header-flower {
-            font-size: 2.2rem;
-            color: var(--romantic-primary);
-            margin-bottom: 10px;
-            opacity: 0.8;
-        }
-
-        .card-romantic .guest-text {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #7c6a65;
-            margin-bottom: 10px;
-        }
-
-        .card-romantic .name-calligraphy {
-            font-family: 'Pinyon Script', cursive;
-            font-size: 5.5rem;
-            color: var(--romantic-primary);
-            line-height: 0.8;
-            margin-bottom: 25px;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
-        }
-
-        .card-romantic .celebration-badge {
-            display: inline-block;
-            background: rgba(217, 107, 126, 0.08);
-            border: 1px solid rgba(217, 107, 126, 0.2);
-            padding: 6px 18px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--romantic-primary);
-            margin-bottom: 30px;
-            font-weight: 600;
-        }
-
-        .card-romantic .message-body {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #5a4f4c;
-            margin-bottom: 35px;
-        }
-
-        .card-romantic .romantic-date-display {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .card-romantic .date-side {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #7c6a65;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            border-bottom: 1px solid rgba(0,0,0,0.1);
-            padding: 5px 0;
-            width: 80px;
-        }
-
-        .card-romantic .date-center {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            font-weight: 400;
-            line-height: 1;
-            color: var(--romantic-primary);
-        }
-
-        .card-romantic .romantic-details-list {
-            margin-top: 30px;
-            text-align: center;
-        }
-
-        .card-romantic .romantic-item {
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        .card-romantic .romantic-item:not(:last-child)::after {
-            content: '•';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(0,0,0,0.15);
-        }
-
-        .card-romantic .romantic-item h5 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #9c847d;
-            margin-bottom: 4px;
-        }
-
-        .card-romantic .romantic-item p {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            color: var(--romantic-text);
-            font-weight: 600;
-        }
-
-
-        /* ==========================================================================
-           BOTONES Y ACCIONES COMUNES (Adaptados para cada estilo de manera elegante)
-           ========================================================================== */
-        .actions-area {
-            margin-top: 35px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .web-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 14px 24px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-            cursor: pointer;
-        }
-
-        /* Botones estilo Moderno */
-        .card-modern .btn-primary {
-            background: #111;
-            color: #fff;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
-        }
-        .card-modern .btn-primary:hover {
-            background: var(--modern-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(224, 82, 99, 0.2);
-        }
-        .card-modern .btn-secondary {
-            background: transparent;
-            color: #111;
-            border: 1px solid #111;
-        }
-        .card-modern .btn-secondary:hover {
-            background: rgba(0,0,0,0.03);
-            transform: translateY(-2px);
-        }
-
-        /* Botones estilo Romántico */
-        .card-romantic .btn-primary {
-            background: var(--romantic-primary);
-            color: #fff;
-            box-shadow: 0 8px 20px rgba(219, 107, 126, 0.25);
-        }
-        .card-romantic .btn-primary:hover {
-            background: #c55669;
-            transform: translateY(-2px);
-            box-shadow: 0 12px 25px rgba(219, 107, 126, 0.4);
-        }
-        .card-romantic .btn-secondary {
-            background: #ffffff;
-            color: var(--romantic-primary);
-            border: 1px solid var(--romantic-soft);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-        .card-romantic .btn-secondary:hover {
-            background: var(--romantic-soft);
-            transform: translateY(-2px);
-        }
-
-        /* Estilización de iconos SVG Minimalistas */
-        .svg-icon {
-            margin-right: 8px;
-            fill: currentColor;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Selector de alternativas en vivo -->
-    <div class="theme-selector">
-        <button class="theme-btn active" onclick="switchTheme('modern')">Diseño 1: Moderno Elegante</button>
-        <button class="theme-btn" onclick="switchTheme('romantic')">Diseño 2: Acuarela Romántica</button>
-    </div>
-
-    <div class="invitation-wrapper">
-
-        <!-- ==================== DISEÑO 1: MODERNO ELEGANTE ==================== -->
-        <div id="panel-modern" class="invitation-card card-modern active">
-            <div class="frame-box">
-                <p class="tagline">Estás invitado</p>
-                <h1 class="main-title">Najhla</h1>
-                <div class="subtitle-number">Mi Primer Año & Bautizo</div>
-                
-                <p class="details-text">
-                    Acompáñanos a celebrar un día lleno de luz, amor y bendiciones en el primer cumpleaños y bautizo de nuestra pequeña.
-                </p>
-
-                <div class="date-section">
-                    <p style="font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: #777; margin-bottom: 5px;">Sábado</p>
-                    <div class="date-big">04 . JULIO</div>
-                    <p style="font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; color: #777; margin-top: 5px;">Año 2026</p>
-                </div>
-
-                <div class="grid-events">
-                    <div class="event-box">
-                        <h4>Misa</h4>
-                        <p>1:00 PM</p>
-                        <span style="font-size: 0.75rem; color: #888; display:block; margin-top:4px;">Parroquia del Sagrado C.</span>
-                    </div>
-                    <div class="event-box">
-                        <h4>Recepción</h4>
-                        <p>3:00 PM</p>
-                        <span style="font-size: 0.75rem; color: #888; display:block; margin-top:4px;">Salón de Eventos Jardín</span>
-                    </div>
-                </div>
-
-                <div class="actions-area">
-                    <a href="https://maps.google.com" target="_blank" class="web-btn btn-primary">
-                        <svg class="svg-icon" width="14" height="14" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        Ubicación del Evento
-                    </a>
-                    <a href="https://wa.me/1234567890?text=Confirmo+asistencia" target="_blank" class="web-btn btn-secondary">
-                        Confirmar por WhatsApp
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ==================== DISEÑO 2: ACUARELA ROMÁNTICA ==================== -->
-        <div id="panel-romantic" class="invitation-card card-romantic">
-            <div class="header-flower">🌸</div>
-            <p class="guest-text">Nuestra dulce niña</p>
-            <h1 class="name-calligraphy">Najhla</h1>
-            <div class="celebration-badge">Primer añito & Bautizo</div>
-
-            <p class="message-body">
-                Hay momentos en la vida que son irrepetibles, pero compartirlos con las personas que más queremos los hace inolvidables.
-            </p>
-
-            <div class="romantic-date-display">
-                <div class="date-side">Julio</div>
-                <div class="date-center">04</div>
-                <div class="date-side">Sábado</div>
-            </div>
-
-            <div class="romantic-details-list">
-                <div class="romantic-item">
-                    <h5>Ceremonia Religiosa</h5>
-                    <p>1:00 pm</p>
-                </div>
-                <div class="romantic-item">
-                    <h5>Celebración en Salón</h5>
-                    <p>3:00 pm</p>
-                </div>
-            </div>
-
-            <div class="actions-area">
-                <a href="https://maps.google.com" target="_blank" class="web-btn btn-primary">
-                    📍 Abrir Mapa de Dirección
-                </a>
-                <a href="https://wa.me/1234567890?text=Hola!+Confirmo+mi+asistencia" target="_blank" class="web-btn btn-secondary">
-                    Confirmar Presencia
-                </a>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Script sencillo para alternar la visualización -->
-    <script>
-        function switchTheme(theme) {
-            // Quitar clase activa de los botones
-            document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
-            // Quitar clase activa de las tarjetas
-            document.querySelectorAll('.invitation-card').forEach(card => card.classList.remove('active'));
-
-            if(theme === 'modern') {
-                document.getElementById('panel-modern').classList.add('active');
-                event.target.classList.add('active');
-            } else if(theme === 'romantic') {
-                document.getElementById('panel-romantic').classList.add('active');
-                event.target.classList.add('active');
-            }
-        }
-    </script>
+  </div>
 </body>
 </html>
